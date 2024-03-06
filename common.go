@@ -21,6 +21,14 @@ type PushResponse struct {
 	message string
 }
 
+func (p *PushResponse) GetCode() int {
+	return p.code
+}
+
+func (p *PushResponse) GetMessage() string {
+	return p.message
+}
+
 // md5 sign
 func GenerateSign(params map[string]string, appKey string) string {
 	var signStr string
@@ -47,7 +55,7 @@ func PushParamMD5(paramstr string) string {
 	return hex.EncodeToString(hasher.Sum(nil))
 }
 
-//resolve push response
+// resolve push response
 func ResolvePushResponse(res *httpclient.Response, err error) PushResponse {
 	var response PushResponse
 	if err != nil {
